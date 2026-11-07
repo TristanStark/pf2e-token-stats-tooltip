@@ -1,0 +1,29 @@
+{
+  "id": "pf2e-token-stats-tooltip",
+  "title": "PF2e - Token Stats Tooltip",
+  "description": "Affiche la CA et les PV actuels/max au survol des tokens PF2e, uniquement pour les utilisateurs autorises a modifier le personnage.",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Tristan Starkl"
+    }
+  ],
+  "compatibility": {
+    "minimum": "14",
+    "maximum": "14"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "pf2e",
+        "type": "system"
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/main.mjs"
+  ],
+  "styles": [
+    "styles/tooltip.css"
+  ]
+}

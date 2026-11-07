@@ -1,0 +1,87 @@
+/* Infobulle purement visuelle, sans intercepter le survol du token. */
+.pf2e-token-stats-tooltip {
+  position: fixed;
+  z-index: 10000;
+  pointer-events: none;
+  box-sizing: border-box;
+  min-width: 144px;
+  max-width: min(280px, calc(100vw - 16px));
+  padding: 9px 11px 8px;
+  border: 1px solid rgba(204, 173, 109, 0.72);
+  border-radius: 8px;
+  background: rgba(20, 23, 31, 0.96);
+  color: #f8f2e7;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.45);
+  font-family: var(--font-primary, "Signika", sans-serif);
+  font-size: 14px;
+  line-height: 1.2;
+  user-select: none;
+}
+
+.pf2e-token-stats-tooltip[hidden] {
+  display: none !important;
+}
+
+.pf2e-token-stats-tooltip__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  white-space: nowrap;
+}
+
+.pf2e-token-stats-tooltip__stat {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.pf2e-token-stats-tooltip__label {
+  color: #d9bb81;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.045em;
+}
+
+.pf2e-token-stats-tooltip__stat strong {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.pf2e-token-stats-tooltip__divider {
+  align-self: stretch;
+  width: 1px;
+  background: rgba(245, 233, 211, 0.23);
+}
+
+.pf2e-token-stats-tooltip__health {
+  height: 4px;
+  margin-top: 8px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.pf2e-token-stats-tooltip__health-fill {
+  height: 100%;
+  width: 0;
+  border-radius: inherit;
+  background: #62c985;
+  transition: width 120ms ease;
+}
+
+.pf2e-token-stats-tooltip[data-health="low"] .pf2e-token-stats-tooltip__health-fill {
+  background: #e5ab43;
+}
+
+.pf2e-token-stats-tooltip[data-health="critical"] .pf2e-token-stats-tooltip__health-fill {
+  background: #e76460;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf2e-token-stats-tooltip__health-fill {
+    transition: none;
+  }
+}
