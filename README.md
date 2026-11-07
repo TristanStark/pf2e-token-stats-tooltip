@@ -1,48 +1,48 @@
 # PF2e - Token Stats Tooltip (Foundry VTT v14)
 
-Petit module client pour **Pathfinder 2e** : au survol d'un token sur la scène, affiche une infobulle contenant :
+A lightweight client-side module for **Pathfinder Second Edition**. Hovering over a token on the canvas displays a tooltip with:
 
-- **CA** (classe d'armure) ;
-- **PV actuels / PV maximum** ;
-- une petite jauge de PV, colorée selon leur pourcentage.
+- **AC** (Armor Class);
+- **Current HP / Maximum HP**;
+- A compact HP bar whose color changes based on the remaining HP percentage.
 
-## Confidentialité et permissions
+## Privacy and permissions
 
-L'infobulle est affichée **uniquement** si `actor.canUserModify(game.user, "update")` retourne `true`. Un utilisateur avec un simple droit de lecture/observation ne la voit pas. Les MJ, qui peuvent modifier les acteurs, la voient également.
+The tooltip appears **only** when `actor.canUserModify(game.user, "update")` returns `true`. Users with read-only or observer permissions cannot see it. Game Masters can also see it, since they can modify actors.
 
-Les données proviennent du `token.actor` de PF2e : cela fonctionne aussi avec les tokens **non liés** au personnage d'origine (acteurs synthétiques). Aucun changement dans les fiches, les tokens ou les droits n'est nécessaire. Aucun socket, aucun transfert d'information vers d'autres joueurs.
+Stats are read from the PF2e `token.actor`, so this also works with **unlinked tokens** (synthetic actors). No changes to character sheets, tokens, or permissions are required. The module does not use sockets or send data to other players.
 
-Si un acteur ne possède pas à la fois une CA et des PV, aucune infobulle n'est affichée.
+If an actor does not have both AC and HP values, no tooltip is displayed.
 
-## Installation manuelle
+## Manual installation
 
-1. Décompresser l'archive ZIP : elle contient un dossier `pf2e-token-stats-tooltip`.
-2. Copier ce dossier dans le répertoire `Data/modules/` de Foundry VTT.
-3. Redémarrer Foundry VTT si nécessaire, puis ouvrir le monde PF2e.
-4. Dans **Gérer les modules**, activer **PF2e - Token Stats Tooltip**.
-5. Survoler un token associé à un acteur que votre compte peut modifier.
+1. Extract the ZIP archive. It contains a `pf2e-token-stats-tooltip` folder.
+2. Copy that folder into your Foundry VTT `Data/modules/` directory.
+3. Restart Foundry VTT if necessary, then open your PF2e world.
+4. Open **Manage Modules** and enable **PF2e - Token Stats Tooltip**.
+5. Hover over a token whose actor your user account has permission to modify.
 
-**Important :** l'archive est prévue pour une installation *manuelle* et non via une URL de manifeste en ligne. Pour l'installation par URL, il faut publier le module et héberger ses fichiers/son ZIP.
+**Important:** The archive is intended for *manual installation*, not installation through an online manifest URL. To support installation via URL, the module must be published and its files/ZIP hosted online.
 
-## Compatibilité
+## Compatibility
 
-- Foundry VTT : **v14 uniquement**.
-- Système : **Pathfinder Second Edition** (`pf2e`).
-- Utilise les API `hoverToken`, `canvas.clientCoordinatesFromCanvas` et `actor.canUserModify` de Foundry v14.
-- Testé par tests unitaires Node.js ; **pas encore testé dans une instance Foundry v14 réelle**.
+- Foundry VTT: **v14 only**.
+- Game system: **Pathfinder Second Edition** (`pf2e`).
+- Uses the Foundry v14 APIs `hoverToken`, `canvas.clientCoordinatesFromCanvas`, and `actor.canUserModify`.
+- Covered by Node.js unit tests; **not yet tested in a running Foundry VTT v14 instance**.
 
-## Fonctionnement
+## How it works
 
-L'infobulle apparaît au-dessus du token (en dessous si elle ne tient pas en haut de l'écran), suit la caméra lors des déplacements/zooms et disparaît à la sortie du survol. Les statistiques sont relues lors des mises à jour de l'acteur ou du token. Elle ne gêne pas les clics grâce à `pointer-events: none`.
+The tooltip appears above the token (or below it if there is not enough room at the top of the screen), follows the canvas when panning or zooming, and disappears when the cursor leaves the token. Stats are read again when the actor or token is updated. The tooltip does not intercept mouse clicks thanks to `pointer-events: none`.
 
-## Tests de logique
+## Logic tests
 
-Avec Node.js récent :
+With a recent version of Node.js:
 
 ```bash
 node --test tests/stats.test.mjs
 ```
 
-## Licence
+## License
 
-MIT (voir `LICENSE`).
+MIT (see `LICENSE`).
